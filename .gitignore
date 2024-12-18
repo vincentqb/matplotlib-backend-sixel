@@ -1,4 +1,5 @@
+*.egg-info/
+.coverage
 .pyc
 __pycache__
 dist/
-*.egg-info/

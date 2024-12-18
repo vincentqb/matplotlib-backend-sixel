@@ -13,12 +13,14 @@ dependencies = ["matplotlib", "sixel"]
 description = "show matplotlib plots directly in your sixel-enabled terminal"
 name = "matplotlib-backend-sixel"
 readme = "README.md"
-version = "1.0.0"
+version = "1.1.0"
 
 [project.optional-dependencies]
 dev = [
   "codespell",
+  "coverage",
   "pre-commit",
+  "pytest",
   "ruff>=0.5.3; python_version>='3.7'",
   "ruff<0.5.3; python_version=='3.6'"
 ]
@@ -27,5 +29,18 @@ dev = [
 "Bug Tracker" = "https://github.com/ctorney/matplotlib-backend-sixel/issues"
 "Homepage" = "https://github.com/ctorney/matplotlib-backend-sixel"
 
+[tool.coverage.report]
+fail_under = 70
+show_missing = false
+
+[tool.coverage.run]
+include = ["matplotlib-backend-sixel.py"]
+
 [tool.hatch.build]
 only-include = ["matplotlib-backend-sixel.py"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+extend-select = ["C901", "I", "RUF022"]
