@@ -1,15 +1,13 @@
 # SPDX-License-Identifier: CC0-1.0
 
 import sys
-
-from subprocess import Popen, PIPE
-import warnings
+import tempfile
 
 from matplotlib import interactive, is_interactive
 from matplotlib._pylab_helpers import Gcf
-from matplotlib.backend_bases import _Backend, FigureManagerBase
+from matplotlib.backend_bases import FigureManagerBase, _Backend
 from matplotlib.backends.backend_agg import FigureCanvasAgg
-
+from sixel import converter
 
 # XXX heuristic for interactive repl
 if sys.flags.interactive:
@@ -18,16 +16,10 @@ if sys.flags.interactive:
 
 class FigureManagerSixel(FigureManagerBase):
     def show(self):
-        try:
-            print('\n   ', end='')
-            p = Popen(["magick", "-bordercolor", "gray", "png:-", "-border", "2", "sixel:-"], stdin=PIPE)
-            self.canvas.figure.savefig(p.stdin, bbox_inches="tight", format="png")
-            p.stdin.close()
-            p.wait()
-        except FileNotFoundError:
-            warnings.warn(
-                "Unable to convert plot to sixel format: Imagemagick not found."
-            )
+        with tempfile.NamedTemporaryFile() as temppng:
+            self.canvas.figure.savefig(temppng.name, bbox_inches="tight", format="png")
+            sixel_convert = converter.SixelConverter(temppng)
+            sixel_convert.write(sys.stdout)
 
 
 class FigureCanvasSixel(FigureCanvasAgg):

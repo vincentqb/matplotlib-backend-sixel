@@ -9,7 +9,7 @@ classifiers = [
     "Framework :: Matplotlib",
     "Topic :: Terminals",
 ]
-dependencies = [ "matplotlib" ]
+dependencies = [ "matplotlib", "sixel" ]
 
 [project.urls]
 "Homepage" = "https://github.com/ctorney/matplotlib-backend-sixel"
