@@ -1,3 +1,6 @@
+from contextlib import redirect_stdout
+from io import StringIO
+
 import numpy as np
 
 
@@ -15,3 +18,10 @@ def test_example():
     plt.fill_between(t, np.cos(t), np.sin(2 * t), alpha=0.5)
 
     assert fig.get_axes()
+
+    with redirect_stdout(StringIO()) as captured:
+        plt.show()
+    captured = captured.getvalue().rstrip("\\")
+
+    assert captured.startswith("\x1b")
+    assert captured.endswith("\x1b")
