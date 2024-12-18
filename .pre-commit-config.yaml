@@ -1,0 +1,43 @@
+repos:
+- repo: https://github.com/codespell-project/codespell
+  rev: v2.3.0
+  hooks:
+  - id: codespell
+    additional_dependencies:
+    - tomli  # if one configures using pyproject.toml
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v5.0.0
+  hooks:
+  - id: end-of-file-fixer
+  - id: mixed-line-ending
+  - id: trailing-whitespace
+  - id: check-toml
+- repo: https://github.com/hukkin/mdformat
+  rev: 0.7.19
+  hooks:
+  - id: mdformat
+    additional_dependencies:
+    - mdformat-gfm  # use github flavor markdown
+    - mdformat-black  # format python code block with black
+    - mdformat-beautysh  # format bash code block with beautysh
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.14.0
+  hooks:
+  - id: pretty-format-toml
+    args: [--autofix]
+  - id: pretty-format-yaml
+    args: [--autofix]
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.8.3
+  hooks:
+    # Run linter
+  - id: ruff
+    types_or: [python, pyi]
+    args: [--fix]
+    # Run formatter
+  - id: ruff-format
+    types_or: [python, pyi]
+- repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.5.10
+  hooks:
+  - id: uv-lock

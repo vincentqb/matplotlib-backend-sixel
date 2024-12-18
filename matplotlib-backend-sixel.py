@@ -33,7 +33,8 @@ class _BackendSixelAgg(_Backend):
 
     # Noop function instead of None signals that
     # this is an "interactive" backend
-    mainloop = lambda: None
+    def mainloop():
+        return
 
     # XXX: `draw_if_interactive` isn't really intended for
     # on-shot rendering. We run the risk of being called
