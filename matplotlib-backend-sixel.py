@@ -31,17 +31,13 @@ class _BackendSixelAgg(_Backend):
     FigureCanvas = FigureCanvasSixel
     FigureManager = FigureManagerSixel
 
-    # Noop function instead of None signals that
-    # this is an "interactive" backend
+    # Noop function instead of None signals that this is an "interactive" backend
     def mainloop():
         return
 
-    # XXX: `draw_if_interactive` isn't really intended for
-    # on-shot rendering. We run the risk of being called
-    # on a figure that isn't completely rendered yet, so
-    # we skip draw calls for figures that we detect as
-    # not being fully initialized yet. Our heuristic for
-    # that is the presence of axes on the figure.
+    # XXX: `draw_if_interactive` isn't really intended for on-shot rendering. We run the risk of being called
+    # on a figure that isn't completely rendered yet, so we skip draw calls for figures that we detect as
+    # not being fully initialized yet. Our heuristic for that is the presence of axes on the figure.
     @classmethod
     def draw_if_interactive(cls):
         manager = Gcf.get_active()
