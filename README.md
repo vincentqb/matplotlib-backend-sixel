@@ -10,25 +10,14 @@ To install
 pip install git+https://github.com/vincentqb/matplotlib-backend-sixel.git
 ```
 
-Configure matplotlib to use the module by either setting the environment variable `MPLBACKEND` to `module://matplotlib-backend-sixel` or by initializing matplotlib as follows.
-
-```python
-import matplotlib
-
-matplotlib.use("module://matplotlib-backend-sixel")
-
-import matplotlib.pyplot as plt
-```
-
-If you've installed this module correctly, you can now use the following sample code to draw a plot in your terminal.
+Configure matplotlib to use the module by either setting the environment variable `MPLBACKEND` to `module://matplotlib-backend-sixel` or by initializing matplotlib as in the example below
 
 ```python
 import numpy as np
 import matplotlib
+import matplotlib.pyplot as plt
 
 matplotlib.use("module://matplotlib-backend-sixel")
-
-import matplotlib.pyplot as plt
 
 plt.style.use("dark_background")
 
